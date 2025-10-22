@@ -1,6 +1,0 @@
-build_from:
-  aarch64: "henrygd/beszel:latest"
-  amd64: "henrygd/beszel:latest"
-  armv7: "henrygd/beszel:latest"
-  armhf: "henrygd/beszel:latest"
-  i386: "henrygd/beszel:latest"

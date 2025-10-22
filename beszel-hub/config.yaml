@@ -8,7 +8,7 @@ arch:
   - armv7
   - armhf
   - i386
-url: "https://github.com/henrygd/beszel"
+url: "https://github.com/anand34577/homeassistant-beszel-hub"
 init: false
 startup: services
 boot: auto
@@ -18,16 +18,17 @@ ports_description:
   8090/tcp: "Web UI port"
 ingress: true
 ingress_port: 8090
+ingress_stream: false
 panel_icon: mdi:monitor-dashboard
 webui: "http://[HOST]:[PORT:8090]"
 map:
-  - addon_config
+  - addon_config:rw
 options:
   app_url: ""
   auto_login: ""
   csp: ""
   disable_password_auth: false
-  mfa_otp: false
+  mfa_otp: "false"
   share_all_systems: false
   trusted_auth_header: ""
   user_creation: false
@@ -38,10 +39,10 @@ schema:
   auto_login: str?
   csp: str?
   disable_password_auth: bool
-  mfa_otp: "list(false|true|superusers)?"
+  mfa_otp: list(false|true|superusers)?
   share_all_systems: bool
   trusted_auth_header: str?
   user_creation: bool
   user_email: str?
   user_password: password?
-image: "henrygd/beszel"
+image: "ghcr.io/{arch}-addon-beszel-hub"

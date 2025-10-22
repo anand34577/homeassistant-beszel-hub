@@ -16,7 +16,7 @@ USER_CREATION=$(bashio::config 'user_creation')
 USER_EMAIL=$(bashio::config 'user_email')
 USER_PASSWORD=$(bashio::config 'user_password')
 
-# Export environment variables with BESZEL_HUB_ prefix
+# Set data directory
 export BESZEL_DATA_DIR="/data/beszel_data"
 
 # Create data directory if it doesn't exist
@@ -75,7 +75,7 @@ fi
 
 # Log startup information
 bashio::log.info "Beszel Hub data directory: ${BESZEL_DATA_DIR}"
-bashio::log.info "Web UI will be available on port 8090"
+bashio::log.info "Web UI available on port 8090"
 
-# Start Beszel Hub (adjust the command based on actual beszel binary location)
-exec /app/beszel serve --http=0.0.0.0:8090
+# Start Beszel Hub
+exec beszel serve --http=0.0.0.0:8090
