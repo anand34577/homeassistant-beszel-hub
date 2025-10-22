@@ -1,58 +1,39 @@
-name: "Beszel Hub"
-description: "Lightweight server monitoring hub with Docker stats and historical data"
-version: "0.2.2"
-slug: "beszel_hub"
-init: false
+name: Beszel Hub
+version: "0.1.0"
+slug: beszel-hub
+description: Lightweight server monitoring hub with Docker and system stats
 arch:
   - aarch64
   - amd64
   - armhf
   - armv7
   - i386
-startup: services
-boot: auto
-hassio_api: true
-hassio_role: default
+url: https://beszel.dev
 ports:
   8090/tcp: 8090
-webui: "http://[HOST]:[PORT:8090]"
-ingress: true
-ingress_port: 8090
-panel_icon: mdi:chart-line
 ports_description:
-  8090/tcp: "Web interface and API"
-map:
-  - data:rw
+  8090/tcp: Web interface
+environment:
+  TZ: Asia/Kolkata
 options:
-  user_email: ""
-  user_password: ""
   app_url: ""
-  disable_password_auth: false
-  share_all_systems: false
   auto_login: ""
   csp: ""
-  mfa_otp: "false"
+  disable_password_auth: false
+  mfa_otp: false
+  share_all_systems: false
   trusted_auth_header: ""
   user_creation: false
+  user_email: ""
+  user_password: ""
 schema:
-  user_email: str?
-  user_password: password?
   app_url: str?
-  disable_password_auth: bool
-  share_all_systems: bool
-  auto_login: str?
+  auto_login: email?
   csp: str?
-  mfa_otp: list(false|true|superusers)
+  disable_password_auth: bool
+  mfa_otp: "list(false|true|superusers)"
+  share_all_systems: bool
   trusted_auth_header: str?
   user_creation: bool
-environment:
-  USER_EMAIL: "{{.options.user_email}}"
-  USER_PASSWORD: "{{.options.user_password}}"
-  APP_URL: "{{.options.app_url}}"
-  DISABLE_PASSWORD_AUTH: "{{.options.disable_password_auth}}"
-  SHARE_ALL_SYSTEMS: "{{.options.share_all_systems}}"
-  AUTO_LOGIN: "{{.options.auto_login}}"
-  CSP: "{{.options.csp}}"
-  MFA_OTP: "{{.options.mfa_otp}}"
-  TRUSTED_AUTH_HEADER: "{{.options.trusted_auth_header}}"
-  USER_CREATION: "{{.options.user_creation}}"
+  user_email: email?
+  user_password: password?
