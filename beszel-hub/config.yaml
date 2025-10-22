@@ -1,5 +1,5 @@
 name: "Beszel Hub"
-version: "0.7.0"
+version: "latest"
 slug: "beszel-hub"
 description: "Lightweight server monitoring hub with Docker statistics, historical data, and alerts"
 arch:
@@ -10,36 +10,40 @@ url: "https://github.com/anand34577/homeassistant-beszel-hub"
 init: false
 startup: services
 boot: auto
+hassio_api: true
+hassio_role: default
 ports:
   8090/tcp: 8090
 ports_description:
   8090/tcp: "Web UI port"
 ingress: true
 ingress_port: 8090
-ingress_stream: false
 panel_icon: mdi:monitor-dashboard
 webui: "http://[HOST]:[PORT:8090]"
 map:
   - config:rw
+environment:
+  BESZEL_DATA_DIR: "/config/beszel_data"
 options:
-  app_url: ""
-  auto_login: ""
-  csp: ""
-  disable_password_auth: false
-  mfa_otp: "false"
-  share_all_systems: false
-  trusted_auth_header: ""
-  user_creation: false
-  user_email: ""
-  user_password: ""
+  BESZEL_HUB_APP_URL: ""
+  BESZEL_HUB_AUTO_LOGIN: ""
+  BESZEL_HUB_CSP: ""
+  BESZEL_HUB_DISABLE_PASSWORD_AUTH: "false"
+  BESZEL_HUB_MFA_OTP: ""
+  BESZEL_HUB_SHARE_ALL_SYSTEMS: "false"
+  BESZEL_HUB_TRUSTED_AUTH_HEADER: ""
+  BESZEL_HUB_USER_CREATION: "false"
+  BESZEL_HUB_USER_EMAIL: ""
+  BESZEL_HUB_USER_PASSWORD: ""
 schema:
-  app_url: str?
-  auto_login: str?
-  csp: str?
-  disable_password_auth: bool
-  mfa_otp: list(false|true|superusers)?
-  share_all_systems: bool
-  trusted_auth_header: str?
-  user_creation: bool
-  user_email: str?
-  user_password: password?
+  BESZEL_HUB_APP_URL: str?
+  BESZEL_HUB_AUTO_LOGIN: str?
+  BESZEL_HUB_CSP: str?
+  BESZEL_HUB_DISABLE_PASSWORD_AUTH: str?
+  BESZEL_HUB_MFA_OTP: str?
+  BESZEL_HUB_SHARE_ALL_SYSTEMS: str?
+  BESZEL_HUB_TRUSTED_AUTH_HEADER: str?
+  BESZEL_HUB_USER_CREATION: str?
+  BESZEL_HUB_USER_EMAIL: str?
+  BESZEL_HUB_USER_PASSWORD: password?
+image: "henrygd/beszel:latest"
