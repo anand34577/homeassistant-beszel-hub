@@ -1,0 +1,47 @@
+name: "Beszel Hub"
+version: "0.7.0"
+slug: "beszel-hub"
+description: "Lightweight server monitoring hub with Docker statistics, historical data, and alerts"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - armhf
+  - i386
+url: "https://github.com/henrygd/beszel"
+init: false
+startup: services
+boot: auto
+ports:
+  8090/tcp: 8090
+ports_description:
+  8090/tcp: "Web UI port"
+ingress: true
+ingress_port: 8090
+panel_icon: mdi:monitor-dashboard
+webui: "http://[HOST]:[PORT:8090]"
+map:
+  - addon_config
+options:
+  app_url: ""
+  auto_login: ""
+  csp: ""
+  disable_password_auth: false
+  mfa_otp: false
+  share_all_systems: false
+  trusted_auth_header: ""
+  user_creation: false
+  user_email: ""
+  user_password: ""
+schema:
+  app_url: str?
+  auto_login: str?
+  csp: str?
+  disable_password_auth: bool
+  mfa_otp: "list(false|true|superusers)?"
+  share_all_systems: bool
+  trusted_auth_header: str?
+  user_creation: bool
+  user_email: str?
+  user_password: password?
+image: "henrygd/beszel"
