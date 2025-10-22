@@ -25,4 +25,3 @@ options:
 schema:
   user_email: str?
   user_password: password?
-image: "ghcr.io/{arch}-addon-beszel-hub"
