@@ -1,5 +1,5 @@
 name: "Beszel Hub"
-version: "latest"
+version: "0.7.0"
 slug: "beszel-hub"
 description: "Lightweight server monitoring hub with Docker statistics, historical data, and alerts"
 arch:
@@ -46,4 +46,4 @@ schema:
   BESZEL_HUB_USER_CREATION: str?
   BESZEL_HUB_USER_EMAIL: str?
   BESZEL_HUB_USER_PASSWORD: password?
-image: "henrygd/beszel:latest"
+image: "henrygd/beszel:0.7.0"
