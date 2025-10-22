@@ -20,7 +20,7 @@ options:
   auto_login: ""
   csp: ""
   disable_password_auth: false
-  mfa_otp: false
+  mfa_otp: "false"
   share_all_systems: false
   trusted_auth_header: ""
   user_creation: false
@@ -28,12 +28,12 @@ options:
   user_password: ""
 schema:
   app_url: str?
-  auto_login: email?
+  auto_login: str?
   csp: str?
   disable_password_auth: bool
   mfa_otp: "list(false|true|superusers)"
   share_all_systems: bool
   trusted_auth_header: str?
   user_creation: bool
-  user_email: email?
+  user_email: str?
   user_password: password?
