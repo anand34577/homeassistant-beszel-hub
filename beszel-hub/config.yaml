@@ -1,6 +1,6 @@
 name: "Beszel Hub"
 description: "Lightweight server monitoring hub with Docker stats and historical data"
-version: "0.1.1"
+version: "0.1.0"
 slug: "beszel_hub"
 init: false
 arch:
@@ -12,7 +12,7 @@ arch:
 startup: services
 boot: auto
 hassio_api: true
-timeout: 30
+hassio_role: default
 ports:
   8090/tcp: 8090
 webui: "http://[HOST]:[PORT:8090]"
@@ -21,9 +21,3 @@ ingress_port: 8090
 panel_icon: mdi:chart-line
 ports_description:
   8090/tcp: "Web interface and API"
-options:
-  user_email: ""
-  user_password: ""
-schema:
-  user_email: str?
-  user_password: password?
