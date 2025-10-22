@@ -1,6 +1,6 @@
 name: "Beszel Hub"
 description: "Lightweight server monitoring hub with Docker stats and historical data"
-version: "0.1.0"
+version: "0.2.0"
 slug: "beszel_hub"
 init: false
 arch:
@@ -21,3 +21,23 @@ ingress_port: 8090
 panel_icon: mdi:chart-line
 ports_description:
   8090/tcp: "Web interface and API"
+options:
+  user_email: ""
+  user_password: ""
+  app_url: ""
+  disable_password_auth: false
+  share_all_systems: false
+  auto_login: ""
+schema:
+  user_email: str?
+  user_password: password?
+  app_url: str?
+  disable_password_auth: bool?
+  share_all_systems: bool?
+  auto_login: email?
+  csp: str?
+  mfa_otp: list(false|true|superusers)?
+  trusted_auth_header: str?
+  user_creation: bool?
+environment:
+  LOG_LEVEL: info

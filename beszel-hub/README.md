@@ -1,61 +1,63 @@
-# Beszel Hub Add-on
+## Configuration
 
-Lightweight server monitoring hub with Docker stats and historical data.
+The add-on can be configured through the Configuration tab. All options are optional.
 
-## About
+### Basic Options
 
-Beszel is a lightweight server resource monitoring hub with historical data, docker stats, and alert functions.
+**user_email** (string, optional)
 
-**Features:**
+- Email address for the initial admin user
+- If not set, you'll create an account on first access
 
-- Real-time server monitoring
-- Docker container statistics
-- Historical data tracking
-- Alert configuration
-- Multi-system monitoring
-- Lightweight and fast
-- Beautiful web interface
+**user_password** (password, optional)
 
-## Installation
+- Password for the initial admin user
+- Must be set if user_email is provided
 
-1. Add this repository to your Home Assistant instance:
-   
-   - Navigate to **Settings** → **Add-ons** → **Add-on Store**
-   - Click the **⋮** menu in the top right
-   - Select **Repositories**
-   - Add: `https://github.com/anand34577/homeassistant-beszel-hub`
+### Advanced Options
 
-2. Install the **Beszel Hub** add-on
+**app_url** (string, optional)
 
-3. Click **"Start"** to run the add-on
+- URL of the web UI
+- Must set if serving at a subpath
+- Example: `https://yourdomain.com/beszel`
 
-4. Click **"OPEN WEB UI"** to access Beszel Hub
+**disable_password_auth** (boolean, default: false)
 
-## First Time Setup
+- Disables password authentication
+- Use this if you want OAuth-only authentication
+- Note: This doesn't disable authentication entirely
 
-1. Open the Web UI
-2. Create your admin account
-3. Configure your monitoring preferences
-4. Add systems to monitor
+**share_all_systems** (boolean, default: false)
 
-## Adding Monitored Systems
+- Makes all systems visible to all users
+- Users can edit or delete any system unless they have the `readonly` role
 
-To monitor systems, install Beszel agents on each server you want to track.
+**auto_login** (email, optional)
 
-### Monitor Other Servers
+- Email address of a user to automatically authenticate
+- ⚠️ Warning: This bypasses authentication completely
+- Only use for single-user setups
 
-For Docker-based systems, use this docker-compose.yml:
+**csp** (string, optional)
 
+- Adds a Content-Security-Policy header with this value
 
+**mfa_otp** (list: false|true|superusers, optional)
 
-Get the public key and setup instructions from the Beszel Hub web interface.
+- Enables multi-factor authentication via email one-time password
+- Options:
+  - `false`: Disabled (default)
+  - `true`: Enabled for all users
+  - `superusers`: Enabled only for superusers
+- ⚠️ Requires SMTP configuration
 
-### Monitor Home Assistant System
+**trusted_auth_header** (string, optional)
 
-Install the **Beszel Agent** add-on from the Community Add-ons repository to monitor your Home Assistant system itself.
+- Trusted header for forwarded authentication
+- Example: `Cf-Access-Authenticated-User-Email` for Cloudflare Access
+- ⚠️ Only use with proper authentication proxy
 
-## Support
+**user_creation** (boolean, default: false)
 
-- [Beszel Documentation](https://beszel.dev)
-- [Beszel GitHub](https://github.com/henrygd/beszel)
-- [Add-on Repository Issues](https://github.com/yourusername/homeassistant-beszel-hub/issues)
+- Enables automatic user creation for OAuth2 / OIDC
