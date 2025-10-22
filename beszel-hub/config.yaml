@@ -1,6 +1,6 @@
 name: "Beszel Hub"
 description: "Lightweight server monitoring hub with Docker stats and historical data"
-version: "0.1.0"
+version: "0.1.1"
 slug: "beszel_hub"
 init: false
 arch:
@@ -11,6 +11,8 @@ arch:
   - i386
 startup: services
 boot: auto
+hassio_api: true
+timeout: 30
 ports:
   8090/tcp: 8090
 webui: "http://[HOST]:[PORT:8090]"

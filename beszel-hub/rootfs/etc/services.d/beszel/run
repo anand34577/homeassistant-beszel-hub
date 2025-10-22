@@ -3,6 +3,20 @@
 # Start Beszel Hub service
 # ==============================================================================
 
+declare beszel_pid
+
+# Function to handle shutdown
+function stop_beszel() {
+    bashio::log.info "Shutting down Beszel Hub..."
+    if [ -n "${beszel_pid}" ]; then
+        kill -TERM "${beszel_pid}" 2>/dev/null
+        wait "${beszel_pid}" 2>/dev/null
+    fi
+}
+
+# Trap SIGTERM and SIGINT
+trap "stop_beszel" SIGTERM SIGINT
+
 bashio::log.info "Starting Beszel Hub..."
 
 # Prepare configuration
@@ -10,20 +24,22 @@ export DATA_DIR=/data/beszel_data
 mkdir -p "${DATA_DIR}"
 
 # Get user options
-USER_EMAIL=$(bashio::config 'user_email')
-USER_PASSWORD=$(bashio::config 'user_password')
-
-# Set environment variables for initial user creation if provided
 if bashio::config.has_value 'user_email'; then
-    export USER_EMAIL="${USER_EMAIL}"
+    export USER_EMAIL=$(bashio::config 'user_email')
     bashio::log.info "Initial admin user email configured"
 fi
 
 if bashio::config.has_value 'user_password'; then
-    export USER_PASSWORD="${USER_PASSWORD}"
+    export USER_PASSWORD=$(bashio::config 'user_password')
     bashio::log.info "Initial admin user password configured"
 fi
 
 # Start Beszel Hub
 bashio::log.info "Starting Beszel Hub on port 8090..."
-exec /usr/local/bin/beszel serve --http=0.0.0.0:8090
+
+# Run Beszel in background and capture PID
+/usr/local/bin/beszel serve --http=0.0.0.0:8090 &
+beszel_pid=$!
+
+# Wait for process
+wait "${beszel_pid}"
