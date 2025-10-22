@@ -1,11 +1,8 @@
 ARG BUILD_FROM
 FROM henrygd/beszel:latest
 
-# Copy startup script
-COPY run.sh /
-
-# Make script executable
-RUN chmod a+x /run.sh
+# Copy startup script with execute permissions directly
+COPY --chmod=755 run.sh /run.sh
 
 # Use our custom startup script
 CMD ["/run.sh"]
