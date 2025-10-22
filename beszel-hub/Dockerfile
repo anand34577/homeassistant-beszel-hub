@@ -1,19 +1,11 @@
 ARG BUILD_FROM=henrygd/beszel:0.7.0
 FROM ${BUILD_FROM}
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# Copy run script if needed
-COPY rootfs /
-
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
 ARG BUILD_NAME
-ARG BUILD_REF
-ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
 
 # Labels
@@ -25,6 +17,7 @@ LABEL \
   io.hass.version="${BUILD_VERSION}" \
   maintainer="Anand"
 
-WORKDIR /data
-
-CMD ["/app/beszel", "serve", "--http=0.0.0.0:8090"]
+# The image already has:
+# ENTRYPOINT ["/beszel"]
+# CMD ["serve", "--http=0.0.0.0:8090"]
+# So we don't need to override anything
