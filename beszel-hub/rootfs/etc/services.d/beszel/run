@@ -1,0 +1,29 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start Beszel Hub service
+# ==============================================================================
+
+bashio::log.info "Starting Beszel Hub..."
+
+# Prepare configuration
+export DATA_DIR=/data/beszel_data
+mkdir -p "${DATA_DIR}"
+
+# Get user options
+USER_EMAIL=$(bashio::config 'user_email')
+USER_PASSWORD=$(bashio::config 'user_password')
+
+# Set environment variables for initial user creation if provided
+if bashio::config.has_value 'user_email'; then
+    export USER_EMAIL="${USER_EMAIL}"
+    bashio::log.info "Initial admin user email configured"
+fi
+
+if bashio::config.has_value 'user_password'; then
+    export USER_PASSWORD="${USER_PASSWORD}"
+    bashio::log.info "Initial admin user password configured"
+fi
+
+# Start Beszel Hub
+bashio::log.info "Starting Beszel Hub on port 8090..."
+exec /usr/local/bin/beszel serve --http=0.0.0.0:8090
