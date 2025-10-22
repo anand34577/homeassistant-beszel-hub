@@ -1,26 +1,27 @@
 name: Beszel Hub
-version: "0.1.0"
-slug: beszel-hub
-description: Lightweight server monitoring hub with Docker and system stats
+version: 0.1.0
+slug: beszel_hub
+description: Lightweight server monitoring hub.
+url: https://beszel.dev/
 arch:
-  - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
-url: https://beszel.dev
+  - aarch64
+image: ghcr.io/yourusername/beszel_hub-{arch}  # Build and push
+startup: application
+boot: auto
+webui: http://[HOST]:[PORT:8090]
 ports:
   8090/tcp: 8090
 ports_description:
-  8090/tcp: Web interface
-environment:
-  TZ: Asia/Kolkata
+  8090/tcp: Web UI
+map:
+  - config:rw
 options:
   app_url: ""
   auto_login: ""
   csp: ""
   disable_password_auth: false
-  mfa_otp: "false"
+  mfa_otp: false
   share_all_systems: false
   trusted_auth_header: ""
   user_creation: false
@@ -30,10 +31,11 @@ schema:
   app_url: str?
   auto_login: str?
   csp: str?
-  disable_password_auth: bool
-  mfa_otp: "list(false|true|superusers)"
-  share_all_systems: bool
+  disable_password_auth: boolean
+  mfa_otp: boolean
+  share_all_systems: boolean
   trusted_auth_header: str?
-  user_creation: bool
+  user_creation: boolean
   user_email: str?
   user_password: password?
+init: false

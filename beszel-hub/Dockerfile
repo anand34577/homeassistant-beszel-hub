@@ -1,18 +1,9 @@
-ARG BUILD_FROM
 FROM henrygd/beszel:latest
 
-# Set default timezone
-ENV TZ=Asia/Kolkata
+RUN apk add --no-cache bash jq
 
-# Copy wrapper script with executable permissions (no RUN needed!)
-COPY --chmod=755 start.sh /start.sh
+COPY run.sh /run.sh
 
-# Use wrapper script
-CMD ["/start.sh"]
+RUN chmod +x /run.sh
 
-# Labels
-LABEL \
-    io.hass.name="Beszel Hub" \
-    io.hass.description="Lightweight server monitoring hub" \
-    io.hass.type="addon" \
-    maintainer="Anand <your.email@example.com>"
+ENTRYPOINT ["/run.sh"]
