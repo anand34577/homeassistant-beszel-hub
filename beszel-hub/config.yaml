@@ -1,6 +1,6 @@
 name: "Beszel Hub"
 description: "Lightweight server monitoring hub with Docker stats and historical data"
-version: "0.2.1"
+version: "0.2.2"
 slug: "beszel_hub"
 init: false
 arch:
@@ -56,4 +56,3 @@ environment:
   MFA_OTP: "{{.options.mfa_otp}}"
   TRUSTED_AUTH_HEADER: "{{.options.trusted_auth_header}}"
   USER_CREATION: "{{.options.user_creation}}"
-  DATA_DIR: "/data/beszel_data"
