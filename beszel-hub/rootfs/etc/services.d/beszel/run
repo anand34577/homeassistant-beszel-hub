@@ -1,0 +1,24 @@
+#!/usr/bin/with-contenv bashio
+
+CONFIG_PATH=/data/options.json
+
+bashio::log.info "Starting Beszel Hub..."
+
+# Parse configuration
+APP_URL=$(bashio::config 'BESZEL_HUB_APP_URL')
+USER_EMAIL=$(bashio::config 'BESZEL_HUB_USER_EMAIL')
+USER_PASSWORD=$(bashio::config 'BESZEL_HUB_USER_PASSWORD')
+
+# Set data directory
+export BESZEL_DATA_DIR="/data/beszel_data"
+mkdir -p "${BESZEL_DATA_DIR}"
+
+# Export environment variables
+[ -n "${APP_URL}" ] && export BESZEL_HUB_APP_URL="${APP_URL}"
+[ -n "${USER_EMAIL}" ] && export BESZEL_HUB_USER_EMAIL="${USER_EMAIL}"
+[ -n "${USER_PASSWORD}" ] && export BESZEL_HUB_USER_PASSWORD="${USER_PASSWORD}"
+
+bashio::log.info "Starting Beszel Hub on port 8090"
+
+# Start Beszel
+exec /app/beszel serve --http=0.0.0.0:8090
