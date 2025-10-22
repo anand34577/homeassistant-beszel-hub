@@ -1,4 +1,4 @@
 build_from:
-  aarch64: henrygd/beszel:0.7.0
-  amd64: henrygd/beszel:0.7.0
-  armv7: henrygd/beszel:0.7.0
+  aarch64: henrygd/beszel:latest
+  amd64: henrygd/beszel:latest
+  armv7: henrygd/beszel:latest
